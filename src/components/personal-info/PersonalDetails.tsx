@@ -1,6 +1,7 @@
 import { ChangeEventHandler } from "react";
 import styled from "styled-components";
 
+//define object props
 interface PersonalDetailsProps {
   onChange: ChangeEventHandler<HTMLInputElement>;
   fullName: string;
