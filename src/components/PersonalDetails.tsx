@@ -8,6 +8,7 @@ interface PersonalDetailsProps {
   email: string;
   phone: string;
   address: string;
+  id: string;
 }
 
 const PersonalDetails = ({
@@ -16,38 +17,43 @@ const PersonalDetails = ({
   fullName,
   phone,
   address,
+  id,
 }: PersonalDetailsProps) => {
   return (
     <FormContainer className="personalInfo">
       <h3>Personal Info</h3>
       <FormStyled>
-        <Label htmlFor="">Full Name</Label>
+        <Label htmlFor={`${id}-fullName`}>Full Name</Label>
         <Input
           type="text"
+          id={`${id}-fullName`}
           placeholder="Jimmy Hendrix"
           value={fullName}
           onChange={onChange}
           name="fullName"
         />
-        <Label htmlFor="">Email</Label>
+        <Label htmlFor={`${id}-email`}>Email</Label>
         <Input
           type="email"
+          id={`${id}-email`}
           placeholder="jimmyHendrixGuitar@gmail.com"
           value={email}
           onChange={onChange}
           name="email"
         />
-        <Label htmlFor="">Phone</Label>
+        <Label htmlFor={`${id}-phone`}>Phone</Label>
         <Input
           type="tel"
+          id={`${id}-phone`}
           placeholder="1-800-call-jimm"
           value={phone}
           onChange={onChange}
           name="phone"
         />
-        <Label htmlFor="">Address</Label>
+        <Label htmlFor={`${id}-address`}>Address</Label>
         <Input
           type="text"
+          id={`${id}-address`}
           placeholder="123 Wallaby Way, Sydney Australia"
           value={address}
           onChange={onChange}
