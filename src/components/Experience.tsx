@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { ChangeEventHandler } from "react";
 import { Buttons } from "./helpers/button";
-import { WithActions } from "./helpers/withActionsProps";
+import { WithActions, handleCancel, handleRemove, handleSave } from "./helpers/withActionsProps";
 
 //define object props
+
 interface ExperienceDetailsProps {
   onChange: ChangeEventHandler<HTMLInputElement>;
   company: string;
@@ -13,6 +14,12 @@ interface ExperienceDetailsProps {
   location: string;
   description: string;
   id: string;
+  onCancel: () => void;
+  onSave: () => void;
+  onRemove: () => void;
+  // handleCancel: () => void;
+  // handleSave: () => void;
+  // handleRemove: () => void;
 }
 
 const ExperienceDetails: React.FC<ExperienceDetailsProps> = ({
@@ -27,6 +34,9 @@ const ExperienceDetails: React.FC<ExperienceDetailsProps> = ({
 }: ExperienceDetailsProps) => {
   return (
     <WithActions
+      onCancel={handleCancel}
+      onRemove={handleRemove}
+      onSave={handleSave}
       cancelText="Cancel"
       saveText="Save"
       removeText="Delete"

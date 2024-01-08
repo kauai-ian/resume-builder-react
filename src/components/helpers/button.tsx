@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/fontawesome-free";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faSave, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
 // define the structure shape of an object. describes props.
-interface ButtonsProps {
+export interface ButtonsProps {
   onCancel: () => void;
   onSave: () => void;
   onRemove: () => void;
@@ -13,7 +13,7 @@ interface ButtonsProps {
   removeText: string;
 }
 
-export const Buttons = ({ onCancel, onSave, onRemove, cancelText, saveText, removeText }: ButtonsProps) => {
+export const Buttons: React.FC<ButtonsProps> = ({ onCancel, onSave, onRemove, cancelText, saveText, removeText }: ButtonsProps) => {
   return (
     <div className="buttons">
       <button className="delete" onClick={onRemove} type="button">
@@ -46,3 +46,5 @@ export const OutlinedButton = styled(ButtonStyled)`
   background-color: transparent;
   color: #fff;
 `;
+
+

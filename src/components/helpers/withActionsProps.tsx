@@ -1,14 +1,28 @@
 import React from "react";
-import { Buttons, ButtonsProps } from "./Buttons";
+import { Buttons, ButtonsProps } from "./button";
+
+export const handleCancel = () => {
+  // reset logic
+  console.log("Cancel");
+};
+
+export const handleSave = () => {
+  // save logic
+  console.log("Save");
+};
+
+export const handleRemove = () => {
+  // remove logic
+  console.log("Remove");
+};
 
 // define props for the withactions component
 interface WithActionsProps extends ButtonsProps {
   children: React.ReactNode; //children components to wrap
-  //additional props specific to each component
 }
 
 // higher order component to handle common actions
-const WithActions: React.FC<WithActionsProps> = ({
+export const WithActions: React.FC<WithActionsProps> = ({
   children,
   onCancel,
   onSave,
@@ -20,25 +34,30 @@ const WithActions: React.FC<WithActionsProps> = ({
   //common logic actions
   const handleCancel = () => {
     //reset
-    if (onCancel && typeof onCancel === "function")
+    if (onCancel && typeof onCancel === "function") {
       // cancel logic
       onCancel();
-    console.log("cancel");
+      console.log("cancel");
+    }
   };
   const handleSave = () => {
-    if (onSave && typeof onSave === "function") 
-    onSave();
-    console.log("save");
+    if (onSave && typeof onSave === "function") {
+      onSave();
+      console.log("save");
+    }
   };
   const handleRemove = () => {
-    if (onRemove && typeof onRemove === "function") 
-    onRemove();
-    console.log("remove");
+    if (onRemove && typeof onRemove === "function") {
+      onRemove();
+      console.log("remove");
+    }
   };
   return (
     <div>
-      {children} // render children components //render button components w/
-      passed props
+      {/* render children components //render button components w/
+      passed props*/}
+      {children}
+      {/* Render Buttons component with passed props */}
       <Buttons
         onCancel={handleCancel}
         onSave={handleSave}
@@ -51,4 +70,4 @@ const WithActions: React.FC<WithActionsProps> = ({
   );
 };
 
-export default WithActions;
+
