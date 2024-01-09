@@ -1,8 +1,18 @@
+import styled from "styled-components";
  
- 
- const formStyles = () => {
+export const FormContainer = styled.div`
+display: flex;
+flex-direction: column;
+border-radius: 5px;
+border: 1px solid white;
+padding: 10px;
+`;
 
-return
-}
+export const FormStyled = styled.form`
+display: flex;
+flex-direction: column;
+`;
 
-export default formStyles
+export const Label = styled.label``;
+
+export const Input = styled.input``;

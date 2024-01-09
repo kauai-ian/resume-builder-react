@@ -3,29 +3,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faSave } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
-// define the structure shape of an object. describes props.
-export interface ButtonsProps {
+export const Buttons: React.FC<{
   onSave: () => void;
   onRemove: () => void;
-}
-
-export const Buttons: React.FC<ButtonsProps> = ({
-  onSave,
-  onRemove,
-}: ButtonsProps) => {
+}> = ({ onSave, onRemove }) => {
   return (
-    <div className="buttons">
+    <ButtonContainerStyled
+    >
       <button className="delete" onClick={onRemove} type="button">
-        <FontAwesomeIcon icon={faTrash as IconDefinition} />
-        Remove
+        <FontAwesomeIcon icon={faTrash as IconDefinition} /> Remove
       </button>
       <button className="save" onClick={onSave} type="button">
-        <FontAwesomeIcon icon={faSave as IconDefinition} />
-        Save
+        <FontAwesomeIcon icon={faSave as IconDefinition} /> Save
       </button>
-    </div>
+    </ButtonContainerStyled>
   );
 };
+
+export const ButtonContainerStyled = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+`;
 
 export const ButtonStyled = styled.button`
   background-color: #fff;
@@ -35,6 +34,7 @@ export const ButtonStyled = styled.button`
   cursor: pointer;
   font-size: 1rem;
   padding: 0.5rem 1rem;
+  margin: 10px;
 `;
 
 export const OutlinedButton = styled(ButtonStyled)`

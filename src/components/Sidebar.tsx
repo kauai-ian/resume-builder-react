@@ -63,12 +63,6 @@ const Sidebar = () => {
         phone={personalInfo.phone}
         address={personalInfo.address}
         id={personalInfo.id}
-        onSave={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-        onRemove={function (): void {
-          throw new Error("Function not implemented.");
-        }}
       />
       <EducationDetails
         onChange={handleEducationDetailsChange}
@@ -78,12 +72,6 @@ const Sidebar = () => {
         endDate={educationInfo.endDate}
         location={educationInfo.location}
         id={educationInfo.id}
-        onSave={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-        onRemove={function (): void {
-          throw new Error("Function not implemented.");
-        }}
       />
       <ExperienceDetails
         onChange={handleExperienceDetailsChange}
@@ -94,12 +82,6 @@ const Sidebar = () => {
         location={experienceInfo.location}
         description={experienceInfo.description}
         id={experienceInfo.id}
-        onSave={function (): void {
-          throw new Error("Function not implemented.");
-        }}
-        onRemove={function (): void {
-          throw new Error("Function not implemented.");
-        }}
       />
     </StyledSidebar>
   );

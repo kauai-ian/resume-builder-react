@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { FormContainer, FormStyled, Label, Input } from "./helpers/form-style";
 import { ChangeEventHandler } from "react";
 import { Buttons } from "./helpers/button";
 import { handleRemove, handleSave } from "./helpers/handlers";
@@ -86,19 +86,3 @@ export const ExperienceDetails: React.FC<{
   );
 };
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-radius: 5px;
-  border: 1px solid white;
-  padding: 10px;
-`;
-
-const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Label = styled.label``;
-
-const Input = styled.input``;
