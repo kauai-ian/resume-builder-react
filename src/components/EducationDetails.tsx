@@ -1,10 +1,9 @@
 import { ChangeEventHandler } from "react";
 import styled from "styled-components";
 import { Buttons } from "./helpers/button";
-import { WithActions } from "./helpers/withActionsProps";
+import { handleRemove, handleSave } from "./helpers/handlers";
 
-//define object props
-interface EducationDetailsProps {
+export const EducationDetails: React.FC<{
   onChange: ChangeEventHandler<HTMLInputElement>;
   school: string;
   degree: string;
@@ -12,15 +11,7 @@ interface EducationDetailsProps {
   endDate: string;
   location: string;
   id: string;
-  onCancel: () => void;
-  onSave: () => void;
-  onRemove: () => void;
-  handleCancel: () => void;
-  handleSave: () => void;
-  handleRemove: () => void;
-}
-
-const EducationDetails = ({
+}> = ({
   onChange,
   school,
   degree,
@@ -28,22 +19,9 @@ const EducationDetails = ({
   endDate,
   location,
   id,
-  onCancel,
-  onRemove,
-  onSave,
-  handleCancel,
-  handleRemove,
-  handleSave,
-}: EducationDetailsProps) => {
+}) => {
   return (
-    <WithActions
-      onCancel={onCancel}
-      onRemove={onRemove}
-      onSave={onSave}
-      cancelText="Cancel"
-      saveText="Save"
-      removeText="Delete"
-    >
+    
       <FormContainer className="Education">
         <h3>Education</h3>
         <FormStyled>
@@ -92,17 +70,10 @@ const EducationDetails = ({
             onChange={onChange}
             name="location"
           />
-          <Buttons
-            onCancel={handleCancel}
-            onSave={handleSave}
-            onRemove={handleRemove}
-            cancelText="Cancel"
-            saveText="Save"
-            removeText="Delete"
-          />
+          <Buttons onSave={handleSave} onRemove={handleRemove} />
         </FormStyled>
       </FormContainer>
-    </WithActions>
+    
   );
 };
 
@@ -122,5 +93,3 @@ const FormStyled = styled.form`
 const Label = styled.label``;
 
 const Input = styled.input``;
-
-export default EducationDetails;

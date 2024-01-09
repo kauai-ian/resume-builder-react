@@ -1,24 +1,16 @@
 import { ChangeEventHandler } from "react";
 import styled from "styled-components";
+import { Buttons } from "./helpers/button";
+import { handleRemove, handleSave } from "./helpers/handlers";
 
-//define object props
-interface PersonalDetailsProps {
+export const PersonalDetails: React.FC<{
   onChange: ChangeEventHandler<HTMLInputElement>;
   fullName: string;
   email: string;
   phone: string;
   address: string;
   id: string;
-}
-
-const PersonalDetails = ({
-  onChange,
-  email,
-  fullName,
-  phone,
-  address,
-  id,
-}: PersonalDetailsProps) => {
+}> = ({ onChange, email, fullName, phone, address, id }) => {
   return (
     <FormContainer className="personalInfo">
       <h3>Personal Info</h3>
@@ -59,6 +51,7 @@ const PersonalDetails = ({
           onChange={onChange}
           name="address"
         />
+        <Buttons onSave={handleSave} onRemove={handleRemove} />
       </FormStyled>
     </FormContainer>
   );
@@ -80,5 +73,3 @@ const FormStyled = styled.form`
 const Label = styled.label``;
 
 const Input = styled.input``;
-
-export default PersonalDetails;

@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import { ChangeEventHandler } from "react";
 import { Buttons } from "./helpers/button";
-import { WithActions, handleCancel, handleRemove, handleSave } from "./helpers/withActionsProps";
+import { handleRemove, handleSave } from "./helpers/handlers";
 
-//define object props
-
-interface ExperienceDetailsProps {
+export const ExperienceDetails: React.FC<{
   onChange: ChangeEventHandler<HTMLInputElement>;
   company: string;
   position: string;
@@ -14,15 +12,7 @@ interface ExperienceDetailsProps {
   location: string;
   description: string;
   id: string;
-  onCancel: () => void;
-  onSave: () => void;
-  onRemove: () => void;
-  // handleCancel: () => void;
-  // handleSave: () => void;
-  // handleRemove: () => void;
-}
-
-const ExperienceDetails: React.FC<ExperienceDetailsProps> = ({
+}> = ({
   onChange,
   company,
   position,
@@ -31,84 +21,68 @@ const ExperienceDetails: React.FC<ExperienceDetailsProps> = ({
   location,
   description,
   id,
-}: ExperienceDetailsProps) => {
+}) => {
   return (
-    <WithActions
-      onCancel={handleCancel}
-      onRemove={handleRemove}
-      onSave={handleSave}
-      cancelText="Cancel"
-      saveText="Save"
-      removeText="Delete"
-    >
-      <FormContainer className="experienceInfo">
-        <h3>Experience</h3>
-        <FormStyled>
-          <Label htmlFor={`${id}-company`}>Company</Label>
-          <Input
-            type="text"
-            id={`${id}-company`}
-            placeholder="Self employed"
-            value={company}
-            onChange={onChange}
-            name="company"
-          />
-          <Label htmlFor={`${id}-position`}>Position</Label>
-          <Input
-            type="text"
-            id={`${id}-position`}
-            placeholder="Guitarist"
-            value={position}
-            onChange={onChange}
-            name="position"
-          />
-          <Label htmlFor={`${id}-startDate`}>Start Date</Label>
-          <Input
-            type="date"
-            id={`${id}-startDate`}
-            placeholder=""
-            value={startDate}
-            onChange={onChange}
-            name="startDate"
-          />
-          <Label htmlFor={`${id}-endDate`}>End Date</Label>
-          <Input
-            type="date"
-            id={`${id}-endDate`}
-            placeholder=""
-            value={endDate}
-            onChange={onChange}
-            name="endDate"
-          />
-          <Label htmlFor="">Location</Label>
-          <Input
-            id={`${id}-location`}
-            type="text"
-            placeholder="Worldwide"
-            value={location}
-            onChange={onChange}
-            name="location"
-          />
-          <Label htmlFor={`${id}-description`}>Description</Label>
-          <Input
-            type="textbox"
-            id={`${id}-description`}
-            placeholder="Traveled the world playing music that changed people forever"
-            value={description}
-            onChange={onChange}
-            name="description"
-          />
-          <Buttons
-            onCancel={handleCancel}
-            onSave={handleSave}
-            onRemove={handleRemove}
-            cancelText="Cancel"
-            saveText="Save"
-            removeText="Delete"
-          />
-        </FormStyled>
-      </FormContainer>
-    </WithActions>
+    <FormContainer className="experienceInfo">
+      <h3>Experience</h3>
+      <FormStyled>
+        <Label htmlFor={`${id}-company`}>Company</Label>
+        <Input
+          type="text"
+          id={`${id}-company`}
+          placeholder="Self employed"
+          value={company}
+          onChange={onChange}
+          name="company"
+        />
+        <Label htmlFor={`${id}-position`}>Position</Label>
+        <Input
+          type="text"
+          id={`${id}-position`}
+          placeholder="Guitarist"
+          value={position}
+          onChange={onChange}
+          name="position"
+        />
+        <Label htmlFor={`${id}-startDate`}>Start Date</Label>
+        <Input
+          type="date"
+          id={`${id}-startDate`}
+          placeholder=""
+          value={startDate}
+          onChange={onChange}
+          name="startDate"
+        />
+        <Label htmlFor={`${id}-endDate`}>End Date</Label>
+        <Input
+          type="date"
+          id={`${id}-endDate`}
+          placeholder=""
+          value={endDate}
+          onChange={onChange}
+          name="endDate"
+        />
+        <Label htmlFor="">Location</Label>
+        <Input
+          id={`${id}-location`}
+          type="text"
+          placeholder="Worldwide"
+          value={location}
+          onChange={onChange}
+          name="location"
+        />
+        <Label htmlFor={`${id}-description`}>Description</Label>
+        <Input
+          type="textbox"
+          id={`${id}-description`}
+          placeholder="Traveled the world playing music that changed people forever"
+          value={description}
+          onChange={onChange}
+          name="description"
+        />
+        <Buttons onSave={handleSave} onRemove={handleRemove} />
+      </FormStyled>
+    </FormContainer>
   );
 };
 
@@ -128,5 +102,3 @@ const FormStyled = styled.form`
 const Label = styled.label``;
 
 const Input = styled.input``;
-
-export default ExperienceDetails;

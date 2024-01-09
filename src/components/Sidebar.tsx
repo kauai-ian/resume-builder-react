@@ -1,40 +1,11 @@
 import styled from "styled-components";
-import PersonalDetails from "./PersonalDetails";
-import EducationDetails from "./EducationDetails";
-import ExperienceDetails from "./Experience";
+import { PersonalDetails } from "./PersonalDetails";
+import { EducationDetails } from "./EducationDetails";
+import { ExperienceDetails } from "./Experience";
 import { useState } from "react";
-// still need to do the data input into the sidebar
-
-// define the structure shape of an object. describes props.
-interface PersonalDetailsProps {
-  fullName: string;
-  email: string;
-  phone: string;
-  address: string;
-  id: string;
-}
-
-interface EducationDetailsProps {
-  school: string;
-  degree: string;
-  startDate: string;
-  endDate: string;
-  location: string;
-  id: string;
-}
-
-interface ExperienceDetailsProps {
-  company: string;
-  position: string;
-  startDate: string;
-  endDate: string;
-  location: string;
-  description: string;
-  id: string;
-}
 
 const Sidebar = () => {
-  const [personalInfo, setPersonalInfo] = useState<PersonalDetailsProps>({
+  const [personalInfo, setPersonalInfo] = useState({
     fullName: "",
     email: "",
     phone: "",
@@ -49,7 +20,7 @@ const Sidebar = () => {
     setPersonalInfo({ ...personalInfo, [name]: value });
   };
 
-  const [educationInfo, setEducationInfo] = useState<EducationDetailsProps>({
+  const [educationInfo, setEducationInfo] = useState({
     school: "",
     degree: "",
     startDate: "",
@@ -65,7 +36,7 @@ const Sidebar = () => {
     setEducationInfo({ ...educationInfo, [name]: value });
   };
 
-  const [experienceInfo, setExperienceInfo] = useState<ExperienceDetailsProps>({
+  const [experienceInfo, setExperienceInfo] = useState({
     company: "",
     position: "",
     startDate: "",
@@ -76,10 +47,11 @@ const Sidebar = () => {
   });
 
   const handleExperienceDetailsChange = (
-    e: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value} = e.target;
-      setExperienceInfo({...experienceInfo, [name]:value})
-    }
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    setExperienceInfo({ ...experienceInfo, [name]: value });
+  };
 
   return (
     <StyledSidebar>
@@ -91,6 +63,12 @@ const Sidebar = () => {
         phone={personalInfo.phone}
         address={personalInfo.address}
         id={personalInfo.id}
+        onSave={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+        onRemove={function (): void {
+          throw new Error("Function not implemented.");
+        }}
       />
       <EducationDetails
         onChange={handleEducationDetailsChange}
@@ -100,6 +78,12 @@ const Sidebar = () => {
         endDate={educationInfo.endDate}
         location={educationInfo.location}
         id={educationInfo.id}
+        onSave={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+        onRemove={function (): void {
+          throw new Error("Function not implemented.");
+        }}
       />
       <ExperienceDetails
         onChange={handleExperienceDetailsChange}
@@ -110,6 +94,12 @@ const Sidebar = () => {
         location={experienceInfo.location}
         description={experienceInfo.description}
         id={experienceInfo.id}
+        onSave={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+        onRemove={function (): void {
+          throw new Error("Function not implemented.");
+        }}
       />
     </StyledSidebar>
   );
