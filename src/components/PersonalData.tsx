@@ -13,6 +13,7 @@ export const PersonalData: React.FC<{
   phone: string;
   address: string;
 }> = ({ fullName, email, phone, address }) => {
+  // const [personalData, setPersonalData] = useState("");
   return (
     <StyledDiv>
       <h1>{fullName}</h1>

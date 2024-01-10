@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faSave } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
-export const Buttons: React.FC<{
+export const ButtonForm: React.FC<{
   onSave: () => void;
   onRemove: () => void;
 }> = ({ onSave, onRemove }) => {

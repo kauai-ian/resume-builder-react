@@ -1,9 +1,9 @@
 import { FormContainer, FormStyled, Label, Input } from "./helpers/form-style";
 import { ChangeEventHandler } from "react";
-import { Buttons } from "./helpers/button";
-import { handleRemove, handleSave } from "./helpers/handlers";
+import { ButtonForm } from "./helpers/buttonForm";
+// import { handleRemove, handleSave } from "./helpers/handlers";
 
-export const ExperienceDetails: React.FC<{
+export const ExperienceForm: React.FC<{
   onChange: ChangeEventHandler<HTMLInputElement>;
   company: string;
   position: string;
@@ -80,9 +80,8 @@ export const ExperienceDetails: React.FC<{
           onChange={onChange}
           name="description"
         />
-        <Buttons onSave={handleSave} onRemove={handleRemove} />
+        <ButtonForm onSave={handleSave} onRemove={handleRemove} />
       </FormStyled>
     </FormContainer>
   );
 };
-

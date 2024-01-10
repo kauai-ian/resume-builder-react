@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { PersonalDetails } from "./PersonalDetails";
-import { EducationDetails } from "./EducationDetails";
-import { ExperienceDetails } from "./Experience";
+import { PersonalForm } from "./PersonalForm";
+import { EducationForm } from "./EducationForm";
+import { ExperienceForm } from "./ExperienceForm";
 import { useState } from "react";
 
 const Sidebar = () => {
@@ -56,7 +56,7 @@ const Sidebar = () => {
   return (
     <StyledSidebar>
       <h2>Enter your info here</h2>
-      <PersonalDetails
+      <PersonalForm
         onChange={handlePersonalDetailsChange}
         fullName={personalInfo.fullName}
         email={personalInfo.email}
@@ -64,7 +64,7 @@ const Sidebar = () => {
         address={personalInfo.address}
         id={personalInfo.id}
       />
-      <EducationDetails
+      <EducationForm
         onChange={handleEducationDetailsChange}
         school={educationInfo.school}
         degree={educationInfo.degree}
@@ -73,7 +73,7 @@ const Sidebar = () => {
         location={educationInfo.location}
         id={educationInfo.id}
       />
-      <ExperienceDetails
+      <ExperienceForm
         onChange={handleExperienceDetailsChange}
         company={experienceInfo.company}
         position={experienceInfo.position}
