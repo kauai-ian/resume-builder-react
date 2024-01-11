@@ -13,7 +13,7 @@ export const ExperienceForm: React.FC<{
   description: string;
   id: string;
 }> = ({
-  onChange,
+  onChange, 
   company,
   position,
   startDate,
@@ -22,6 +22,20 @@ export const ExperienceForm: React.FC<{
   description,
   id,
 }) => {
+
+  // const onChange = () => {
+  //   console.log("Save");
+  // };
+  
+const handleRemove = () => {
+    // perform clear of form
+    console.log("Remove");
+  };
+
+  const handleSubmit = () => {
+    //perform state update
+    console.log("submit")
+  }
   return (
     <FormContainer className="experienceInfo">
       <h3>Experience</h3>
@@ -46,7 +60,7 @@ export const ExperienceForm: React.FC<{
         />
         <Label htmlFor={`${id}-startDate`}>Start Date</Label>
         <Input
-          type="date"
+          type="text"
           id={`${id}-startDate`}
           placeholder=""
           value={startDate}
@@ -55,7 +69,7 @@ export const ExperienceForm: React.FC<{
         />
         <Label htmlFor={`${id}-endDate`}>End Date</Label>
         <Input
-          type="date"
+          type="text"
           id={`${id}-endDate`}
           placeholder=""
           value={endDate}
@@ -73,14 +87,14 @@ export const ExperienceForm: React.FC<{
         />
         <Label htmlFor={`${id}-description`}>Description</Label>
         <Input
-          type="textbox"
+          type="textarea"
           id={`${id}-description`}
           placeholder="Traveled the world playing music that changed people forever"
           value={description}
           onChange={onChange}
           name="description"
         />
-        <ButtonForm onSave={handleSave} onRemove={handleRemove} />
+        <ButtonForm onSave={handleSubmit} onRemove={handleRemove} />
       </FormStyled>
     </FormContainer>
   );

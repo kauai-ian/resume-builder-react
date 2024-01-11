@@ -1,7 +1,7 @@
 import { ChangeEventHandler } from "react";
 import { FormContainer, FormStyled, Label, Input } from "./helpers/form-style";
 import { ButtonForm } from "./helpers/buttonForm";
-import { handleRemove, handleSave } from "./helpers/handlers";
+// import { handleRemove, handleSave } from "./helpers/handlers";
 
 export const PersonalForm: React.FC<{
   onChange: ChangeEventHandler<HTMLInputElement>;
@@ -11,6 +11,16 @@ export const PersonalForm: React.FC<{
   address: string;
   id: string;
 }> = ({ onChange, email, fullName, phone, address, id }) => {
+
+  const handleSave = () => {
+  
+    console.log("Save");
+  };
+  
+const handleRemove = () => {
+    
+    console.log("Remove");
+  };
   return (
     <FormContainer className="personalInfo">
       <h3>Personal Info</h3>

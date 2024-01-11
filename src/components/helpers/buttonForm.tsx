@@ -2,10 +2,11 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faSave } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { MouseEventHandler } from "react";
 
 export const ButtonForm: React.FC<{
-  onSave: () => void;
-  onRemove: () => void;
+  onSave: MouseEventHandler<HTMLButtonElement>;
+  onRemove: MouseEventHandler<HTMLButtonElement>;
 }> = ({ onSave, onRemove }) => {
   return (
     <ButtonContainerStyled

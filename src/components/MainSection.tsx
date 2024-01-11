@@ -4,7 +4,7 @@ const Main = () => {
     return (
         <div className="main">
             <h2>Your Name Here</h2>
-            <ResumeDisplay/>
+            <ResumeDisplay personalData={[]} educationData={[]}/>
         </div>
     )
 }

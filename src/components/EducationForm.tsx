@@ -1,6 +1,12 @@
-// import { ChangeEventHandler } from "react";
+import { ChangeEventHandler } from "react";
 import { FormContainer, FormStyled, Label, Input } from "./helpers/form-style";
-import { ButtonForm } from "./helpers/buttonForm";
+// import { ButtonForm } from "./helpers/buttonForm";
+import { useState } from "react";
+import { v4 as uuid } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faSave } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import styled from "styled-components";
 
 export type EducationData = {
   school: string;
@@ -12,80 +18,138 @@ export type EducationData = {
 };
 
 export const EducationForm: React.FC<{
-  // onChange: ChangeEventHandler<HTMLInputElement>;
-  onSave: (data: EducationData) => void;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  onFormSubmit: (formData: EducationData) => void;
   school: string;
   degree: string;
   startDate: string;
   endDate: string;
   location: string;
   id: string;
-}> = ({ onSave, school, degree, startDate, endDate, location, id }) => {
-  const handleSave = () => {
-    const formData: EducationData = {
-      school, degree, startDate, endDate, location, id,
-    }
-    onSave(formData)
-    console.log("Save");
+}> = ({ onFormSubmit }) => {
+  const [formData, setFormData] = useState<EducationData>({
+    school: "",
+    degree: "",
+    startDate: "",
+    endDate: "",
+    location: "",
+    id: "",
+  });
+
+  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const newFormData: EducationData = {
+      ...formData,
+      id: uuid(),
+    };
+    onFormSubmit(newFormData);
+    setFormData({
+      school: "",
+      degree: "",
+      startDate: "",
+      endDate: "",
+      location: "",
+      id: "",
+    });
+    // setFormData((prevValues) => ({...prevValues, [newFormData.id]: newFormData}));
+    console.log("Save", newFormData);
   };
-  
-const handleRemove = () => {
-    
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const clearForm = () => {
+    setFormData({
+      school: "",
+      degree: "",
+      startDate: "",
+      endDate: "",
+      location: "",
+      id: "",
+    });
     console.log("Remove");
   };
 
-
   return (
-    <FormContainer className="Education">
+    <FormContainer className="EducationContainer">
       <h3>Education</h3>
-      <FormStyled>
+      <FormStyled data-array="education" onSubmit={(e) => handleSave(e)}>
         <Label htmlFor="">School</Label>
         <Input
-          id={`${id}-school`}
           type="text"
           placeholder="School of Hard Rock"
-          value={school}
-          // onChange={onChange}
+          value={formData.school}
+          onChange={handleInputChange}
           name="school"
         />
         <Label htmlFor="">Degree</Label>
         <Input
-          id={`${id}-degree`}
           type="text"
           placeholder="Music"
-          value={degree}
-          // onChange={onChange}
+          value={formData.degree}
+          onChange={handleInputChange}
           name="degree"
         />
         <Label htmlFor="">Start Date</Label>
         <Input
-          id={`{id}-startDate`}
-          type="date"
+          type="text"
           placeholder="1/1/1958"
-          value={startDate}
-          // onChange={onChange}
+          value={formData.startDate}
+          onChange={handleInputChange}
           name="startDate"
         />
         <Label htmlFor="">End Date</Label>
         <Input
-          id={`${id}-endDate`}
-          type="date"
+          type="text"
           placeholder="1/1/1962"
-          value={endDate}
-          // onChange={onChange}
+          value={formData.endDate}
+          onChange={handleInputChange}
           name="endDate"
         />
         <Label htmlFor="">Location</Label>
         <Input
-          id={`${id}-location`}
           type="text"
           placeholder="USA"
-          value={location}
-          // onChange={onChange}
+          value={formData.location}
+          onChange={handleInputChange}
           name="location"
         />
-        <ButtonForm onSave={handleSave} onRemove={handleRemove} />
+        <ButtonContainerStyled>
+          <button className="delete" onClick={clearForm} type="button">
+            <FontAwesomeIcon icon={faTrash as IconDefinition} /> Remove
+          </button>
+          <button className="save" onClick={handleSave} type="button">
+            <FontAwesomeIcon icon={faSave as IconDefinition} /> Save
+          </button>
+        </ButtonContainerStyled>
       </FormStyled>
     </FormContainer>
   );
 };
+
+export const ButtonContainerStyled = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+`;
+
+export const ButtonStyled = styled.button`
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  color: #000;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 10px;
+`;
+
+export const OutlinedButton = styled(ButtonStyled)`
+  background-color: transparent;
+  color: #fff;
+`;
