@@ -1,88 +1,35 @@
 import styled from "styled-components";
 import { PersonalForm } from "./PersonalForm";
-import { EducationForm } from "./EducationForm";
+import { EducationForm, EducationData } from "./EducationForm";
 import { ExperienceForm } from "./ExperienceForm";
-import { useState } from "react";
+import { Dispatch, SetStateAction, ReactNode } from "react";
 
-const Sidebar = () => {
-  const [personalInfo, setPersonalInfo] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    address: "",
-    id: "",
-  });
+type SidebarProps = {
+  onPersonalDataChange: Dispatch<SetStateAction<EducationData[]>>;
+  onEducationDataChange: Dispatch<SetStateAction<EducationData[]>>;
+  onExperienceDataChange: Dispatch<SetStateAction<EducationData[]>>;
+  children?: ReactNode;
+};
 
-  const handlePersonalDetailsChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    setPersonalInfo({ ...personalInfo, [name]: value });
+const Sidebar: React.FC<SidebarProps> = ({ onEducationDataChange }) => {
+  const handlePersonalDetailsChange = (formData: PersonalData) => {
+    onPersonalDataChange([formData]);
   };
 
-  const [educationInfo, setEducationInfo] = useState({
-    school: "",
-    degree: "",
-    startDate: "",
-    endDate: "",
-    location: "",
-    id: "",
-  });
-
-  const handleEducationDetailsChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    setEducationInfo({ ...educationInfo, [name]: value });
+  const handleEducationDetailsChange = (formData: EducationData) => {
+    onEducationDataChange([formData]);
   };
 
-  const [experienceInfo, setExperienceInfo] = useState({
-    company: "",
-    position: "",
-    startDate: "",
-    endDate: "",
-    location: "",
-    description: "",
-    id: "",
-  });
-
-  const handleExperienceDetailsChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    setExperienceInfo({ ...experienceInfo, [name]: value });
+  const handleExperienceDetailsChange = (formData: ExperienceData) => {
+    onExperienceDataChange([formData]);
   };
 
   return (
     <StyledSidebar>
       <h2>Enter your info here</h2>
-      <PersonalForm
-        onChange={handlePersonalDetailsChange}
-        fullName={personalInfo.fullName}
-        email={personalInfo.email}
-        phone={personalInfo.phone}
-        address={personalInfo.address}
-        id={personalInfo.id}
-      />
-      <EducationForm
-        onChange={handleEducationDetailsChange}
-        school={educationInfo.school}
-        degree={educationInfo.degree}
-        startDate={educationInfo.startDate}
-        endDate={educationInfo.endDate}
-        location={educationInfo.location}
-        id={educationInfo.id}
-      />
-      <ExperienceForm
-        onChange={handleExperienceDetailsChange}
-        company={experienceInfo.company}
-        position={experienceInfo.position}
-        startDate={experienceInfo.startDate}
-        endDate={experienceInfo.endDate}
-        location={experienceInfo.location}
-        description={experienceInfo.description}
-        id={experienceInfo.id}
-      />
+      <PersonalForm onFormSubmit={handlePersonalDetailsChange} />
+      <EducationForm onFormSubmit={handleEducationDetailsChange} />
+      <ExperienceForm onFormSubmit={handleExperienceDetailsChange} />
     </StyledSidebar>
   );
 };

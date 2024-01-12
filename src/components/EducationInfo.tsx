@@ -1,25 +1,21 @@
 import React from "react";
-import { EducationData } from "./EducationForm";
+// import { EducationForm } from "./EducationForm";
 
-
-export type EducationData = {
+export type EducationInfoProps = {
   school: string;
   degree: string;
   startDate: string;
   endDate: string;
   location: string;
   id: string;
-};
+}
 
-export const EducationInfo: React.FC<EducationData> = ({
-  school,
-  degree,
-  location,
-  startDate,
-  endDate,
-}) => {
+export const EducationInfo: React.FC<EducationInfoProps> = ({ school, degree, startDate, endDate, location }) => {
+  
   return (
     <div>
+      
+      
       <div>
         <p>
           {startDate}

@@ -1,6 +1,5 @@
-import { ChangeEventHandler } from "react";
+// import { ChangeEventHandler } from "react";
 import { FormContainer, FormStyled, Label, Input } from "./helpers/form-style";
-// import { ButtonForm } from "./helpers/buttonForm";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,14 +17,7 @@ export type EducationData = {
 };
 
 export const EducationForm: React.FC<{
-  onChange: ChangeEventHandler<HTMLInputElement>;
   onFormSubmit: (formData: EducationData) => void;
-  school: string;
-  degree: string;
-  startDate: string;
-  endDate: string;
-  location: string;
-  id: string;
 }> = ({ onFormSubmit }) => {
   const [formData, setFormData] = useState<EducationData>({
     school: "",
@@ -36,13 +28,15 @@ export const EducationForm: React.FC<{
     id: "",
   });
 
-  const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSave: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
     const newFormData: EducationData = {
       ...formData,
       id: uuid(),
     };
     onFormSubmit(newFormData);
+
     setFormData({
       school: "",
       degree: "",
@@ -51,8 +45,7 @@ export const EducationForm: React.FC<{
       location: "",
       id: "",
     });
-    // setFormData((prevValues) => ({...prevValues, [newFormData.id]: newFormData}));
-    console.log("Save", newFormData);
+    console.log("Save education", newFormData);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +54,7 @@ export const EducationForm: React.FC<{
       ...prevData,
       [name]: value,
     }));
+    console.log("input change", formData)
   };
 
   const clearForm = () => {
@@ -78,52 +72,62 @@ export const EducationForm: React.FC<{
   return (
     <FormContainer className="EducationContainer">
       <h3>Education</h3>
-      <FormStyled data-array="education" onSubmit={(e) => handleSave(e)}>
-        <Label htmlFor="">School</Label>
-        <Input
-          type="text"
-          placeholder="School of Hard Rock"
-          value={formData.school}
-          onChange={handleInputChange}
-          name="school"
-        />
-        <Label htmlFor="">Degree</Label>
-        <Input
-          type="text"
-          placeholder="Music"
-          value={formData.degree}
-          onChange={handleInputChange}
-          name="degree"
-        />
-        <Label htmlFor="">Start Date</Label>
-        <Input
-          type="text"
-          placeholder="1/1/1958"
-          value={formData.startDate}
-          onChange={handleInputChange}
-          name="startDate"
-        />
-        <Label htmlFor="">End Date</Label>
-        <Input
-          type="text"
-          placeholder="1/1/1962"
-          value={formData.endDate}
-          onChange={handleInputChange}
-          name="endDate"
-        />
-        <Label htmlFor="">Location</Label>
-        <Input
-          type="text"
-          placeholder="USA"
-          value={formData.location}
-          onChange={handleInputChange}
-          name="location"
-        />
+      <FormStyled data-array="education" onSubmit={handleSave}>
+        <Label>
+          School
+          <Input
+            type="text"
+            placeholder="School of Hard Rock"
+            value={formData.school}
+            onChange={handleInputChange}
+            name="school"
+          />
+        </Label>
+        <Label>
+          Degree
+          <Input
+            type="text"
+            placeholder="Music"
+            value={formData.degree}
+            onChange={handleInputChange}
+            name="degree"
+          />
+        </Label>
+        <Label>
+          Start Date
+          <Input
+            type="text"
+            placeholder="1/1/1958"
+            value={formData.startDate}
+            onChange={handleInputChange}
+            name="startDate"
+          />
+        </Label>
+        <Label>
+          End Date
+          <Input
+            type="text"
+            placeholder="1/1/1962"
+            value={formData.endDate}
+            onChange={handleInputChange}
+            name="endDate"
+          />
+        </Label>
+        <Label>
+          Location
+          <Input
+            type="text"
+            placeholder="USA"
+            value={formData.location}
+            onChange={handleInputChange}
+            name="location"
+          />
+        </Label>
         <ButtonContainerStyled>
           <button className="delete" onClick={clearForm} type="button">
             <FontAwesomeIcon icon={faTrash as IconDefinition} /> Remove
           </button>
-          <button className="save" onClick={handleSave} type="button">
+          <button className="save" type="submit">
             <FontAwesomeIcon icon={faSave as IconDefinition} /> Save
           </button>
         </ButtonContainerStyled>

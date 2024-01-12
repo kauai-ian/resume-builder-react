@@ -1,10 +1,12 @@
 import { FormContainer, FormStyled, Label, Input } from "./helpers/form-style";
-import { ChangeEventHandler } from "react";
-import { ButtonForm } from "./helpers/buttonForm";
-// import { handleRemove, handleSave } from "./helpers/handlers";
+import { useState } from "react";
+import { v4 as uuid } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faSave } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import styled from "styled-components";
 
-export const ExperienceForm: React.FC<{
-  onChange: ChangeEventHandler<HTMLInputElement>;
+export type ExperienceData = {
   company: string;
   position: string;
   startDate: string;
@@ -12,30 +14,42 @@ export const ExperienceForm: React.FC<{
   location: string;
   description: string;
   id: string;
-}> = ({
-  onChange, 
-  company,
-  position,
-  startDate,
-  endDate,
-  location,
-  description,
-  id,
-}) => {
+};
 
-  // const onChange = () => {
-  //   console.log("Save");
-  // };
-  
-const handleRemove = () => {
-    // perform clear of form
-    console.log("Remove");
+export const ExperienceForm: React.FC<{
+  onFormSubmit: (formData: ExperienceData) => void;
+}> = ({ onFormSubmit }) => {
+  const [formData, setFormData] = useState<ExperienceData>({
+    company: "",
+    position: "",
+    startDate: "",
+    endDate: "",
+    location: "",
+    description: "",
+    id: "",
+  });
+
+  const handleSave: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    const newFormData: ExperienceData = {
+      ...formData,
+      id: uuid(),
+    };
+    onFormSubmit(newFormData);
+
+    setFormData({
+      company: "",
+      position: "",
+      startDate: "",
+      endDate: "",
+      location: "",
+      description: "",
+      id: "",
+    });
+    console.log("Save experience", newFormData);
   };
 
-  const handleSubmit = () => {
-    //perform state update
-    console.log("submit")
-  }
   return (
     <FormContainer className="experienceInfo">
       <h3>Experience</h3>
