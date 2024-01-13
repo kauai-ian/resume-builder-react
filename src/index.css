@@ -11,8 +11,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   width: 100vw;
   padding: 0;
+
+  margin: 0 auto;
+  text-align: center;
 }
 
 a {
@@ -68,11 +72,6 @@ button:focus-visible {
 
 .title {
   color: rgb(255, 255, 255);
-  background-image: linear-gradient(
-    to bottom right,
-    rgba(95, 207, 255, 0.614),
-    rgba(255, 255, 0, 0.456)
-  );
-  margin: 0;
+  margin: 0 0 20px;
   padding: 0;
 }

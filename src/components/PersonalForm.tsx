@@ -30,13 +30,6 @@ export const PersonalForm: React.FC<{
       id: uuid(),
     };
     onFormSubmit(newFormData);
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      address: "",
-      id: "",
-    });
     console.log("save personal data", newFormData);
   };
 

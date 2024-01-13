@@ -34,15 +34,6 @@ export const EducationForm: React.FC<{
       id: uuid(),
     };
     onFormSubmit(newFormData);
-
-    setFormData({
-      school: "",
-      degree: "",
-      startDate: "",
-      endDate: "",
-      location: "",
-      id: "",
-    });
     console.log("Save education", newFormData);
   };
 

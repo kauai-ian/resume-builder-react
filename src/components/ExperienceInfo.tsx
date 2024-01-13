@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "styled-components";
+
 
 export type ExperienceDataProps = {
   company: string;
@@ -10,31 +12,43 @@ export type ExperienceDataProps = {
   id: string;
 };
 
-export const ExperienceInfo: React.FC<ExperienceDataProps> =({
+export const ExperienceInfo: React.FC<ExperienceDataProps> = ({
   company,
-    position,
-    startDate,
-    endDate,
-    location,
-    description,
+  position,
+  startDate,
+  endDate,
+  location,
+  description,
 }) => {
-
   return (
-    <div>
-      <div>
+    <Container>
+      <LeftDiv>
         <p>
           {startDate}
           {startDate && endDate && <span> - </span>}
           {endDate}
         </p>
         <p>{location}</p>
-      </div>
+      </LeftDiv>
 
-      <div>
+      <RightDiv>
         <p>{company}</p>
         <p>{position}</p>
         <p>{description}</p>
-      </div>
-    </div>
-  )
-}
+      </RightDiv>
+    </Container>
+  );
+};
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const LeftDiv = styled.div`
+  flex: 1;
+`;
+
+const RightDiv = styled.div`
+  flex: 2;
+  max-width: 20vw;
+`;

@@ -34,16 +34,6 @@ export const ExperienceForm: React.FC<{
       id: uuid(),
     };
     onFormSubmit(newFormData);
-
-    setFormData({
-      company: "",
-      position: "",
-      startDate: "",
-      endDate: "",
-      location: "",
-      description: "",
-      id: "",
-    });
     console.log("Save experience", newFormData);
   };
 
