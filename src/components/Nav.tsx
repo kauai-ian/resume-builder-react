@@ -3,7 +3,7 @@
 const Nav= () => {
     return (
         <div className="navigation">
-            <h1 className="title" >Resume Builder</h1>
+            <h1 className="title" >Resumé Builder</h1>
         </div>
     )
 }

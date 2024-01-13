@@ -5,17 +5,15 @@ import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import { MouseEventHandler } from "react";
 
 export const ButtonForm: React.FC<{
-  onSave: MouseEventHandler<HTMLButtonElement>;
   onRemove: MouseEventHandler<HTMLButtonElement>;
-}> = ({ onSave, onRemove }) => {
+}> = ({ onRemove }) => {
   return (
-    <ButtonContainerStyled
-    >
-      <button className="delete" onClick={onRemove} type="button">
-        <FontAwesomeIcon icon={faTrash as IconDefinition} /> Remove
-      </button>
-      <button className="save" onClick={onSave} type="button">
+    <ButtonContainerStyled>
+      <button className="save" type="submit">
         <FontAwesomeIcon icon={faSave as IconDefinition} /> Save
+      </button>
+      <button className="delete" onClick={onRemove} type="button">
+        <FontAwesomeIcon icon={faTrash as IconDefinition} /> Clear
       </button>
     </ButtonContainerStyled>
   );
@@ -25,6 +23,7 @@ export const ButtonContainerStyled = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  justify-content: center;
 `;
 
 export const ButtonStyled = styled.button`

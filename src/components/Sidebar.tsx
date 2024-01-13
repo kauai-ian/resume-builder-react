@@ -1,32 +1,38 @@
 import styled from "styled-components";
-import { PersonalForm } from "./PersonalForm";
+import { PersonalForm, PersonalData } from "./PersonalForm";
 import { EducationForm, EducationData } from "./EducationForm";
-import { ExperienceForm } from "./ExperienceForm";
+import { ExperienceForm, ExperienceData } from "./ExperienceForm";
 import { Dispatch, SetStateAction, ReactNode } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
 type SidebarProps = {
-  onPersonalDataChange: Dispatch<SetStateAction<EducationData[]>>;
+  onPersonalDataChange: Dispatch<SetStateAction<PersonalData[]>>;
   onEducationDataChange: Dispatch<SetStateAction<EducationData[]>>;
-  onExperienceDataChange: Dispatch<SetStateAction<EducationData[]>>;
+  onExperienceDataChange: Dispatch<SetStateAction<ExperienceData[]>>;
   children?: ReactNode;
+  clearResume: () => void;
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ onEducationDataChange }) => {
-  const handlePersonalDetailsChange = (formData: PersonalData) => {
-    onPersonalDataChange([formData]);
+const Sidebar: React.FC<SidebarProps> = ({ onEducationDataChange, onExperienceDataChange, onPersonalDataChange, clearResume }) => {
+  const handlePersonalDetailsChange = (perFormData: PersonalData) => {
+    onPersonalDataChange([perFormData]);
   };
 
-  const handleEducationDetailsChange = (formData: EducationData) => {
-    onEducationDataChange([formData]);
+  const handleEducationDetailsChange = (edFormData: EducationData) => {
+    onEducationDataChange([edFormData]);
   };
 
-  const handleExperienceDetailsChange = (formData: ExperienceData) => {
-    onExperienceDataChange([formData]);
+  const handleExperienceDetailsChange = (expFormData: ExperienceData) => {
+    onExperienceDataChange([expFormData]);
   };
+
 
   return (
     <StyledSidebar>
       <h2>Enter your info here</h2>
+      <button onClick={clearResume}><FontAwesomeIcon icon={faTrash as IconDefinition} />{" "}Clear Entire Resumé</button>
       <PersonalForm onFormSubmit={handlePersonalDetailsChange} />
       <EducationForm onFormSubmit={handleEducationDetailsChange} />
       <ExperienceForm onFormSubmit={handleExperienceDetailsChange} />

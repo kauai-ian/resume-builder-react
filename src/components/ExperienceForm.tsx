@@ -1,10 +1,7 @@
 import { FormContainer, FormStyled, Label, Input } from "./helpers/form-style";
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faSave } from "@fortawesome/free-solid-svg-icons";
-import { IconDefinition } from "@fortawesome/fontawesome-common-types";
-import styled from "styled-components";
+import { ButtonForm } from "./helpers/buttonForm";
 
 export type ExperienceData = {
   company: string;
@@ -29,7 +26,7 @@ export const ExperienceForm: React.FC<{
     id: "",
   });
 
-  const handleSave: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
     const newFormData: ExperienceData = {
@@ -50,65 +47,78 @@ export const ExperienceForm: React.FC<{
     console.log("Save experience", newFormData);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({...prevData, [name]: value}))
+    console.log("exp input change")
+  }
+
+  const handleRemove = () => {
+    setFormData({
+      company: "",
+      position: "",
+      startDate: "",
+      endDate: "",
+      location: "",
+      description: "",
+      id: "",
+    })
+    console.log("remove")
+  }
+
   return (
-    <FormContainer className="experienceInfo">
+    <FormContainer className="experienceContainer">
       <h3>Experience</h3>
-      <FormStyled>
-        <Label htmlFor={`${id}-company`}>Company</Label>
+      <FormStyled data-array="experience" onSubmit={handleSubmit}>
+        <Label >Company
         <Input
           type="text"
-          id={`${id}-company`}
-          placeholder="Self employed"
-          value={company}
-          onChange={onChange}
+          placeholder="The Jimmy Hendrix Experience"
+          value={formData.company}
+          onChange={handleInputChange}
           name="company"
-        />
-        <Label htmlFor={`${id}-position`}>Position</Label>
+        /></Label>
+        <Label >Position
         <Input
           type="text"
-          id={`${id}-position`}
           placeholder="Guitarist"
-          value={position}
-          onChange={onChange}
+          value={formData.position}
+          onChange={handleInputChange}
           name="position"
-        />
-        <Label htmlFor={`${id}-startDate`}>Start Date</Label>
+        /></Label>
+        <Label >Start Date
         <Input
           type="text"
-          id={`${id}-startDate`}
           placeholder=""
-          value={startDate}
-          onChange={onChange}
+          value={formData.startDate}
+          onChange={handleInputChange}
           name="startDate"
-        />
-        <Label htmlFor={`${id}-endDate`}>End Date</Label>
+        /></Label>
+        <Label >End Date
         <Input
           type="text"
-          id={`${id}-endDate`}
           placeholder=""
-          value={endDate}
-          onChange={onChange}
+          value={formData.endDate}
+          onChange={handleInputChange}
           name="endDate"
-        />
-        <Label htmlFor="">Location</Label>
+        /></Label>
+        <Label >Location
         <Input
-          id={`${id}-location`}
           type="text"
-          placeholder="Worldwide"
-          value={location}
-          onChange={onChange}
+          placeholder="San Francisco CA"
+          value={formData.location}
+          onChange={handleInputChange}
           name="location"
-        />
-        <Label htmlFor={`${id}-description`}>Description</Label>
+        /></Label>
+        <Label >Description
         <Input
           type="textarea"
-          id={`${id}-description`}
           placeholder="Traveled the world playing music that changed people forever"
-          value={description}
-          onChange={onChange}
+          value={formData.description}
+          onChange={handleInputChange}
           name="description"
-        />
-        <ButtonForm onSave={handleSubmit} onRemove={handleRemove} />
+        /></Label>
+        <ButtonForm onRemove={handleRemove} />
       </FormStyled>
     </FormContainer>
   );

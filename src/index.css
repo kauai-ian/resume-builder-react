@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  padding: 0;
 }
 
 a {
@@ -33,6 +35,11 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: rgb(153, 212, 249);
+}
+
+h3 {
+  text-decoration: underline;
 }
 
 button {
@@ -52,4 +59,20 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.resume-subheading {
+  background-color: rgb(183, 185, 185);
+  color: rgb(26, 26, 26);
+}
+
+.title {
+  color: rgb(255, 255, 255);
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(95, 207, 255, 0.614),
+    rgba(255, 255, 0, 0.456)
+  );
+  margin: 0;
+  padding: 0;
 }

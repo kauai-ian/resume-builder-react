@@ -7,16 +7,21 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
-export const PersonalData: React.FC<{
+export type PersonalDataProps = {
   fullName: string;
   email: string;
   phone: string;
   address: string;
-}> = ({ fullName, email, phone, address }) => {
-  // const [personalData, setPersonalData] = useState("");
+  id: string;
+}
+
+export const PersonalData: React.FC<
+  PersonalDataProps
+> = ({ email, phone, address }) => {
+  
   return (
     <StyledDiv>
-      <h1>{fullName}</h1>
+      
       <div>
         <FontAwesomeIcon icon={faEnvelope as IconDefinition} /> {email}
       </div>

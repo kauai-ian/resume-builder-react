@@ -1,67 +1,102 @@
-import { ChangeEventHandler } from "react";
+import { useState } from "react";
 import { FormContainer, FormStyled, Label, Input } from "./helpers/form-style";
 import { ButtonForm } from "./helpers/buttonForm";
-// import { handleRemove, handleSave } from "./helpers/handlers";
+import { v4 as uuid } from "uuid";
 
-export const PersonalForm: React.FC<{
-  onChange: ChangeEventHandler<HTMLInputElement>;
+export type PersonalData = {
   fullName: string;
   email: string;
   phone: string;
   address: string;
   id: string;
-}> = ({ onChange, email, fullName, phone, address, id }) => {
+};
 
-  const handleSave = () => {
-  
-    console.log("Save");
+export const PersonalForm: React.FC<{
+  onFormSubmit: (formData: PersonalData) => void;
+}> = ({ onFormSubmit }) => {
+  const [formData, setFormData] = useState<PersonalData>({
+    fullName: "",
+    email: "",
+    phone: "",
+    address: "",
+    id: "",
+  });
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    const newFormData: PersonalData = {
+      ...formData,
+      id: uuid(),
+    };
+    onFormSubmit(newFormData);
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      address: "",
+      id: "",
+    });
+    console.log("save personal data", newFormData);
   };
-  
-const handleRemove = () => {
-    
-    console.log("Remove");
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    console.log("personal input change");
+  };
+
+  const handleRemove = () => {
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      address: "",
+      id: "",
+    });
+    console.log("remove");
   };
   return (
     <FormContainer className="personalInfo">
       <h3>Personal Info</h3>
-      <FormStyled>
-        <Label htmlFor={`${id}-fullName`}>Full Name</Label>
+      <FormStyled data-array="personal" onSubmit={handleSubmit}>
+        <Label >Full Name
         <Input
           type="text"
-          id={`${id}-fullName`}
+          id={formData.id}
           placeholder="Jimmy Hendrix"
-          value={fullName}
-          onChange={onChange}
+          value={formData.fullName}
+          onChange={handleInputChange}
           name="fullName"
-        />
-        <Label htmlFor={`${id}-email`}>Email</Label>
+        /></Label>
+        <Label >Email
         <Input
           type="email"
-          id={`${id}-email`}
+          id={formData.id}
           placeholder="jimmyHendrixGuitar@gmail.com"
-          value={email}
-          onChange={onChange}
+          value={formData.email}
+          onChange={handleInputChange}
           name="email"
-        />
-        <Label htmlFor={`${id}-phone`}>Phone</Label>
+        /></Label>
+        <Label >Phone
         <Input
           type="tel"
-          id={`${id}-phone`}
+          id={formData.id}
           placeholder="1-800-call-jimm"
-          value={phone}
-          onChange={onChange}
+          value={formData.phone}
+          onChange={handleInputChange}
           name="phone"
-        />
-        <Label htmlFor={`${id}-address`}>Address</Label>
+        /></Label>
+        <Label >Address
         <Input
           type="text"
-          id={`${id}-address`}
-          placeholder="123 Wallaby Way, Sydney Australia"
-          value={address}
-          onChange={onChange}
+          id={formData.id}
+          placeholder="1524A Haight St., San Francisco CA"
+          value={formData.address}
+          onChange={handleInputChange}
           name="address"
-        />
-        <ButtonForm onSave={handleSave} onRemove={handleRemove} />
+        /></Label>
+        <ButtonForm  onRemove={handleRemove} />
       </FormStyled>
     </FormContainer>
   );

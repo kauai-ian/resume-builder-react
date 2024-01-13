@@ -1,5 +1,4 @@
 import React from "react";
-// import { EducationForm } from "./EducationForm";
 
 export type EducationInfoProps = {
   school: string;
