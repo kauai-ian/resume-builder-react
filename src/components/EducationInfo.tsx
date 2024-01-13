@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 export type EducationInfoProps = {
   school: string;
@@ -12,22 +13,37 @@ export type EducationInfoProps = {
 export const EducationInfo: React.FC<EducationInfoProps> = ({ school, degree, startDate, endDate, location }) => {
   
   return (
-    <div>
+    <Container>
       
       
-      <div>
+      <LeftDiv>
         <p>
           {startDate}
           {startDate && endDate && <span> - </span>}
           {endDate}
         </p>
         <p>{location}</p>
-      </div>
+      </LeftDiv>
 
-      <div>
+      <RightDiv>
         <p>{school}</p>
         <p>{degree}</p>
-      </div>
-    </div>
+      </RightDiv>
+    </Container>
   );
 };
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const LeftDiv = styled.div`
+  flex: 1;
+`;
+
+const RightDiv = styled.div`
+  flex: 2;
+  max-width: 80%;
+  text-align: left;
+`;
+

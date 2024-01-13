@@ -50,5 +50,6 @@ const LeftDiv = styled.div`
 
 const RightDiv = styled.div`
   flex: 2;
-  max-width: 20vw;
+  max-width: 80%;
+  text-align: left;
 `;
