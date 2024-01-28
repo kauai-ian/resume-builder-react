@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FormContainer, FormStyled, Label, Input } from "./helpers/form-style";
 import { ButtonForm } from "./helpers/buttonForm";
 import { v4 as uuid } from "uuid";
+import { PersonalData } from "./PersonalData";
 
 export type PersonalData = {
   fullName: string;
@@ -14,13 +15,14 @@ export type PersonalData = {
 export const PersonalForm: React.FC<{
   onFormSubmit: (formData: PersonalData) => void;
 }> = ({ onFormSubmit }) => {
-  const [formData, setFormData] = useState<PersonalData>({
+  const initState: PersonalData = {
     fullName: "",
     email: "",
     phone: "",
     address: "",
-    id: "",
-  });
+    id: uuid(),
+  };
+  const [formData, setFormData] = useState<PersonalData>(initState);
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -39,57 +41,55 @@ export const PersonalForm: React.FC<{
     console.log("personal input change");
   };
 
-  const handleRemove = () => {
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      address: "",
-      id: "",
-    });
+  const handleClearForm = () => {
+    setFormData(initState);
     console.log("remove");
   };
   return (
     <FormContainer className="personalInfo">
       <h3>Personal Info</h3>
       <FormStyled data-array="personal" onSubmit={handleSubmit}>
-        <Label >Full Name
-        <Input
-          type="text"
-          id={formData.id}
-          placeholder="Jimmy Hendrix"
-          value={formData.fullName}
-          onChange={handleInputChange}
-          name="fullName"
-        /></Label>
-        <Label >Email
-        <Input
-          type="email"
-          id={formData.id}
-          placeholder="jimmyHendrixGuitar@gmail.com"
-          value={formData.email}
-          onChange={handleInputChange}
-          name="email"
-        /></Label>
-        <Label >Phone
-        <Input
-          type="tel"
-          id={formData.id}
-          placeholder="1-800-call-jimm"
-          value={formData.phone}
-          onChange={handleInputChange}
-          name="phone"
-        /></Label>
-        <Label >Address
-        <Input
-          type="text"
-          id={formData.id}
-          placeholder="1524A Haight St., San Francisco CA"
-          value={formData.address}
-          onChange={handleInputChange}
-          name="address"
-        /></Label>
-        <ButtonForm  onRemove={handleRemove} />
+        <Label>
+          Full Name
+          <Input
+            type="text"
+            id={formData.id}
+            value={formData.fullName}
+            onChange={handleInputChange}
+            name="fullName"
+          />
+        </Label>
+        <Label>
+          Email
+          <Input
+            type="email"
+            id={formData.id}
+            value={formData.email}
+            onChange={handleInputChange}
+            name="email"
+          />
+        </Label>
+        <Label>
+          Phone
+          <Input
+            type="tel"
+            id={formData.id}
+            value={formData.phone}
+            onChange={handleInputChange}
+            name="phone"
+          />
+        </Label>
+        <Label>
+          Address
+          <Input
+            type="text"
+            id={formData.id}
+            value={formData.address}
+            onChange={handleInputChange}
+            name="address"
+          />
+        </Label>
+        <ButtonForm onRemove={handleClearForm} />
       </FormStyled>
     </FormContainer>
   );

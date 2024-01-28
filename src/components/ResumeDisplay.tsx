@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 export const ResumeDisplay: React.FC<{
   educationData: EducationInfoProps[];
   experienceData: ExperienceDataProps[];
-  personalData: PersonalDataProps[];
+  personalData: PersonalDataProps;
 }> = ({ personalData, educationData, experienceData }) => {
   // console.log("educationData", { educationData });
   // console.log("expData resume display", { experienceData });
@@ -15,17 +15,15 @@ export const ResumeDisplay: React.FC<{
   return (
     <div className="resumeContainer">
       <div></div>
-      {personalData.map((data) => (
         <ResumeContainer key={uuid()}>
           <PersonalData
-            fullName={data.fullName}
-            email={data.email}
-            phone={data.phone}
-            address={data.address}
-            id={data.id}
+            fullName={personalData.fullName}
+            email={personalData.email}
+            phone={personalData.phone}
+            address={personalData.address}
+            id={personalData.id}
           />
         </ResumeContainer>
-      ))}
       <h3 className="resume-subheading">Education</h3>
       {educationData.map((data) => (
         <ResumeContainer key={uuid()}>

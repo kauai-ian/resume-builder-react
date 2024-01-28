@@ -46,7 +46,7 @@ export const EducationForm: React.FC<{
     console.log("ed input change", formData)
   };
 
-  const handleRemove = () => {
+  const handleClearForm = () => {
     setFormData({
       school: "",
       degree: "",
@@ -66,7 +66,6 @@ export const EducationForm: React.FC<{
           School
           <Input
             type="text"
-            placeholder="School of Hard Rock"
             value={formData.school}
             onChange={handleInputChange}
             name="school"
@@ -76,7 +75,6 @@ export const EducationForm: React.FC<{
           Degree
           <Input
             type="text"
-            placeholder="Music"
             value={formData.degree}
             onChange={handleInputChange}
             name="degree"
@@ -86,7 +84,6 @@ export const EducationForm: React.FC<{
           Start Date
           <Input
             type="text"
-            placeholder="1/1/1958"
             value={formData.startDate}
             onChange={handleInputChange}
             name="startDate"
@@ -96,7 +93,6 @@ export const EducationForm: React.FC<{
           End Date
           <Input
             type="text"
-            placeholder="1/1/1962"
             value={formData.endDate}
             onChange={handleInputChange}
             name="endDate"
@@ -106,13 +102,12 @@ export const EducationForm: React.FC<{
           Location
           <Input
             type="text"
-            placeholder="USA"
             value={formData.location}
             onChange={handleInputChange}
             name="location"
           />
         </Label>
-        <ButtonForm onRemove={handleRemove} />
+        <ButtonForm onRemove={handleClearForm} />
         
       </FormStyled>
     </FormContainer>

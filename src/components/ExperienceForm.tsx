@@ -43,7 +43,7 @@ export const ExperienceForm: React.FC<{
     console.log("exp input change")
   }
 
-  const handleRemove = () => {
+  const handleClearForm = () => {
     setFormData({
       company: "",
       position: "",
@@ -63,7 +63,6 @@ export const ExperienceForm: React.FC<{
         <Label >Company
         <Input
           type="text"
-          placeholder="The Jimmy Hendrix Experience"
           value={formData.company}
           onChange={handleInputChange}
           name="company"
@@ -71,7 +70,6 @@ export const ExperienceForm: React.FC<{
         <Label >Position
         <Input
           type="text"
-          placeholder="Guitarist"
           value={formData.position}
           onChange={handleInputChange}
           name="position"
@@ -95,7 +93,6 @@ export const ExperienceForm: React.FC<{
         <Label >Location
         <Input
           type="text"
-          placeholder="San Francisco CA"
           value={formData.location}
           onChange={handleInputChange}
           name="location"
@@ -103,12 +100,11 @@ export const ExperienceForm: React.FC<{
         <Label >Description
         <Input
           type="textarea"
-          placeholder="Traveled the world playing music that changed people forever"
           value={formData.description}
           onChange={handleInputChange}
           name="description"
         /></Label>
-        <ButtonForm onRemove={handleRemove} />
+        <ButtonForm onRemove={handleClearForm} />
       </FormStyled>
     </FormContainer>
   );
